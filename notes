@@ -1,0 +1,7 @@
+run app on node.js
+
+$node app.js
+
+- on app start: enter key from database. e.g.- http://127.0.0.1:8080/vs11
+
+it will redirect to the URL.

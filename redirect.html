@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Redirect</title>
+    </head>
+
+    <body id="ref" onload="newRef()">
+        <script>
+            function newRef(){
+                var b = document.getElementById("ref").innerText;
+                console.log(b);
+                window.open(b, '_self'); /* open url in same tab */
+            }
+        </script>
+    </body>
+</html>
