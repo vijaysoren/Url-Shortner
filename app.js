@@ -6,17 +6,15 @@
 
 
 var database = require('./database.json');
-const urlmanager = require('./urlmanager')
 
 var http = require('http');
 var https = require('https');
 var fs = require('fs');
 var url = require('url');
-const { stringify } = require('querystring');
-const { KeyObject } = require('crypto');
-const { Script } = require('vm');
+
 var index = fs.readFileSync('index.html');
 var urlRef = fs.readFileSync('redirect.html');
+var pNotFound = fs.readFileSync('404.html');
 //var urlCode;
 
 const host = '127.0.0.1';
@@ -36,8 +34,9 @@ const server = http.createServer((req, res) => {
     var b = getKeyValue(database, reqUrl);
     
     console.log("Url fetched : "+ b);
-
-    //urlCode.keys(reqUrlCode);
+    
+    try {
+        //urlCode.keys(reqUrlCode);
     if(reqUrlCode === '/' ){
         res.statusCode = 200;
         res.setHeader('Content-Type', 'text/html');
@@ -48,8 +47,10 @@ const server = http.createServer((req, res) => {
         res.write(b);
         res.end(urlRef);
     }
-    
-    
+    } catch (error) {
+        res.end(pNotFound);
+        console.log("Failed to load: ", error);
+    }
 });
 
 
